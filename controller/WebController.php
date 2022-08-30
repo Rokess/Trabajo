@@ -236,7 +236,7 @@ class WebController extends ControladorBase {
         $matricula = $_POST['matricula'];
         if (isset($_POST['borrar'])) {
             $mensaje = $this->vehiculomodel->borrarVehiculo($matricula);
-
+ 
             $dat = array("modo" => "insertarVehiculo", "mensaje" => $mensaje);
             $this->view("vehiculos", $dat);
         }
