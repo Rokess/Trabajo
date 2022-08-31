@@ -1,20 +1,22 @@
 <?php
 
-class VehiculoModel extends Conexion {
-
+class VehiculoModel extends Conexion
+{
     private $table;
     private $conexion;
 
-    public function __construct() {
-        $this->table = "vehiculo";
+    public function __construct()
+    {
+        $this->table = 'vehiculo';
         $this->conexion = $this->getConexion();
     }
 
-    function getVehiculoBastidor($bastidor) {
-        $consulta = "select * from vehiculo where bastidor = ? ";
+    function getVehiculoBastidor($bastidor)
+    {
+        $consulta = 'select * from vehiculo where bastidor = ? ';
         $conn = $this->getConexion();
         if ($conn == null) {
-            return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
+            return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
         }
         try {
             $sentencia = $conn->prepare($consulta);
@@ -27,11 +29,12 @@ class VehiculoModel extends Conexion {
         }
     }
 
-    function getVehiculoMatricula($matricula) {
-        $consulta = "select * from vehiculo where matricula = ? ";
+    function getVehiculoMatricula($matricula)
+    {
+        $consulta = 'select * from vehiculo where matricula = ? ';
         $conn = $this->getConexion();
         if ($conn == null) {
-            return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
+            return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
         }
         try {
             $sentencia = $conn->prepare($consulta);
@@ -44,11 +47,12 @@ class VehiculoModel extends Conexion {
         }
     }
 
-    function getVehichuloDni($dni) {
-        $consulta = "select * from vehiculo where DNI = ? ";
+    function getVehichuloDni($dni)
+    {
+        $consulta = 'select * from vehiculo where DNI = ? ';
         $conn = $this->getConexion();
         if ($conn == null) {
-            return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
+            return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
         }
         try {
             $sentencia = $conn->prepare($consulta);
@@ -61,13 +65,22 @@ class VehiculoModel extends Conexion {
         }
     }
 
-    public function insertarVehiculo($matricula, $bastidor, $fecha, $nombre, $dni, $telefono, $taller) {
 
-        $consulta = "insert into vehiculo (matricula, bastidor, fecha, nombre, dni, telefono, taller) "
-                . " values(?, ?, ?, ?, ?, ?, ?)";
+    public function insertarVehiculo(
+        $matricula,
+        $bastidor,
+        $fecha,
+        $nombre,
+        $dni,
+        $telefono,
+        $taller
+    ) {
+        $consulta =
+            'insert into vehiculo (matricula, bastidor, fecha, nombre, dni, telefono, taller) ' .
+            ' values(?, ?, ?, ?, ?, ?, ?)';
         $conn = $this->getConexion();
         if ($conn == null) {
-            return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
+            return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
         }
         try {
             $sentencia = $conn->prepare($consulta);
@@ -85,20 +98,49 @@ class VehiculoModel extends Conexion {
         }
     }
 
-    function borrarVehiculo($matricula) {
-        $consulta = "delete from vehiculo where matricula = ?";
+    function borrarVehiculo($matricula)
+    {
+        $consulta = 'delete from vehiculo where matricula = ?';
         $conn = $this->getConexion();
         if ($conn == null) {
-            return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
+            return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
         }
         try {
             $sentencia = $conn->prepare($consulta);
             $sentencia->bindParam(1, $matricula);
             $num = $sentencia->execute();
-            return "vehiculo con matricula " . $matricula . ", borrado.";
+            return 'vehiculo con matricula ' . $matricula . ', borrado.';
         } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
 
+    public function modificarVehiculo(
+        $matricula,
+        $bastidor,
+        $fecha,
+        $nombre,
+        $dni,
+        $telefono
+    ) {
+        $consulta =
+            'UPDATE vehiculo SET bastidor = ?, fecha = ?, nombre = ?, dni = ?, telefono = ? WHERE matricula = ? ';
+        $conn = $this->getConexion();
+        if ($conn == null) {
+            return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
+        }
+        try {
+            $sentencia = $conn->prepare($consulta);
+            $sentencia->bindParam(1, $bastidor);
+            $sentencia->bindParam(2, $fecha);
+            $sentencia->bindParam(3, $nombre);
+            $sentencia->bindParam(4, $dni);
+            $sentencia->bindParam(5, $telefono);
+            $sentencia->bindParam(6, $matricula);
+            $num = $sentencia->execute();
+            return "Actualizado con exito!";
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

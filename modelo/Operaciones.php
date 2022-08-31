@@ -8,12 +8,17 @@ class Operaciones {
     private $matricula;
     private $presupuesto;
 
-    public function __construct($piezaId, $horas, $pago, $matricula, $presupuesto) {
+    public function __construct($idoperaciones, $piezaId, $horas, $pago, $matricula, $presupuesto) {
+        $this->idoperaciones = $idoperaciones;
         $this->piezaId = $piezaId;
         $this->horas = $horas;
         $this->pago = $pago;
         $this->matricula = $matricula;
         $this->presupuesto = $presupuesto;
+    }
+
+    public function getIdOperaciones() {
+        return $this->idoperaciones;
     }
 
     public function getPiezaId() {
@@ -34,6 +39,10 @@ class Operaciones {
 
     public function getPresupuesto() {
         return $this->presupuesto;
+    }
+
+    public function setIdOperaciones($idoperaciones): void {
+        $this->idoperaciones = $idoperaciones;
     }
 
     public function setPiezaId($piezaId): void {

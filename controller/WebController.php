@@ -1,14 +1,15 @@
 <?php
 
-class WebController extends ControladorBase {
-
+class WebController extends ControladorBase
+{
     private $almacenmodel;
     private $operacionesmodel;
     private $proveedoresmodel;
     private $tallermodel;
     private $vehiculomodel;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->almacenmodel = new AlmacenModel();
         $this->operacionesmodel = new OperacionesModel();
@@ -17,89 +18,111 @@ class WebController extends ControladorBase {
         $this->vehiculomodel = new VehiculoModel();
     }
 
-    public function index() {
-        $dat = array("index");
-        $this->view("index", $dat); //se abre la vista mensajesView
+    public function index()
+    {
+        $dat = ['index'];
+        $this->view('index', $dat); //se abre la vista mensajesView
     }
 
-    public function verSuscripcion() {
-        $dat = array("Suscripcion");
-        $this->view("suscripcion", $dat); //se abre la vista mensajesView
+    public function verSuscripcion()
+    {
+        $dat = ['Suscripcion'];
+        $this->view('suscripcion', $dat); //se abre la vista mensajesView
     }
 
-    public function verContacto() {
-        $dat = array("Contacto");
-        $this->view("contacto", $dat); //se abre la vista mensajesView
+    public function verContacto()
+    {
+        $dat = ['Contacto'];
+        $this->view('contacto', $dat); //se abre la vista mensajesView
     }
 
-    public function verInicio() {
-        $dat = array("Inicio");
-        $this->view("inicio", $dat); //se abre la vista mensajesView
+    public function verInicio()
+    {
+        $dat = ['Inicio'];
+        $this->view('inicio', $dat); //se abre la vista mensajesView
     }
 
-    public function verLogin() {
-        $dat = array("Login");
-        $this->view("login", $dat); //se abre la vista mensajesView
+    public function verLogin()
+    {
+        $dat = ['Login'];
+        $this->view('login', $dat); //se abre la vista mensajesView
     }
 
-    public function verSingUp() {
-        $dat = array("SigUp");
-        $this->view("singup", $dat); //se abre la vista mensajesView
+    public function verSingUp()
+    {
+        $dat = ['SigUp'];
+        $this->view('singup', $dat); //se abre la vista mensajesView
     }
 
-    public function verAlmacen() {
+    public function verAlmacen()
+    {
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
-        $dat = array("all" => $all, "prov" => $prov);
-        $this->view("almacen", $dat); //se abre la vista mensajesView
+        $dat = ['all' => $all, 'prov' => $prov];
+        $this->view('almacen', $dat); //se abre la vista mensajesView
     }
 
-    public function verOperaciones() {
+    public function verOperaciones()
+    {
         $all = $this->almacenmodel->getAll();
-        $dat = array("pieza" => $all, "modo" => "insertarOperacion");
-        $this->view("operaciones", $dat); //se abre la vista mensajesView
+        $oper = $this->operacionesmodel->getAll();
+        $dat = ['pieza' => $all, 'modo' => 'insertarOperacion', "oper"=>$oper];
+        $this->view('operaciones', $dat); //se abre la vista mensajesView
     }
 
-    public function verVehiculos() {
-        $dat = array("Vehiculos");
-        $this->view("vehiculos", $dat); //se abre la vista mensajesView
+    public function verVehiculos()
+    {
+        $dat = ['Vehiculos'];
+        $this->view('vehiculos', $dat); //se abre la vista mensajesView
     }
 
-    public function comprobarusuclave() {
+    public function comprobarusuclave()
+    {
         $nombre = $_POST['nombre'];
         $clave = $_POST['clave'];
         $usuario = $this->tallermodel->comprobarusuclave($nombre, $clave);
         if (is_object($usuario)) {
-            $dat = array("usuario" => $usuario);
+            $dat = ['usuario' => $usuario];
             $_SESSION['nombre'] = $nombre;
-            $this->view("inicio", $dat);
+            $this->view('inicio', $dat);
         } else {
-            $dat = array("usuario" => $usuario);
-            $this->view("login", $dat);
+            $dat = ['usuario' => $usuario];
+            $this->view('login', $dat);
         }
     }
 
-    public function buscarProveedor() {
+    public function buscarProveedor()
+    {
         $proveedor = $_POST['proveedor'];
-        $almacenProveedor = $this->almacenmodel->getAlmacenProveedor($proveedor);
+        $almacenProveedor = $this->almacenmodel->getAlmacenProveedor(
+            $proveedor
+        );
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
 
-        $dat = array("almacen" => $almacenProveedor, "all" => $all, "prov" => $prov);
-        $this->view("almacen", $dat);
+        $dat = ['almacen' => $almacenProveedor, 'all' => $all, 'prov' => $prov];
+        $this->view('almacen', $dat);
     }
 
-    public function buscarDescripcion() {
+    public function buscarDescripcion()
+    {
         $descripcion = $_POST['nombre'];
-        $almacenDescripcion = $this->almacenmodel->getAlmacenDescripcion($descripcion);
+        $almacenDescripcion = $this->almacenmodel->getAlmacenDescripcion(
+            $descripcion
+        );
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
 
-        $dat = array("almacen" => $almacenDescripcion, "all" => $all, "prov" => $prov);
-        $this->view("almacen", $dat);
+        $dat = [
+            'almacen' => $almacenDescripcion,
+            'all' => $all,
+            'prov' => $prov,
+        ];
+        $this->view('almacen', $dat);
     }
 
-    public function insertarAlmacen() {
+    public function insertarAlmacen()
+    {
         $cantidad = $_POST['cantidad'];
         $descripcion = $_POST['descripcion'];
         $descuento = $_POST['descuento'];
@@ -109,23 +132,31 @@ class WebController extends ControladorBase {
 
         $men = $this->almacenmodel->getAlmacenProveedor($nombre);
         if (is_object($men)) {
-            $mensaje = "Ya existe un dato con ese nombre.";
+            $mensaje = 'Ya existe un dato con ese nombre.';
         } else {
-            $lastid = $this->almacenmodel->insertarAlmacen($id, $cantidad, $descripcion, $descuento, $precio, $nombre);
+            $lastid = $this->almacenmodel->insertarAlmacen(
+                $id,
+                $cantidad,
+                $descripcion,
+                $descuento,
+                $precio,
+                $nombre
+            );
             if (is_numeric($lastid)) {
-                $mensaje = "Almacen insertado con el id: " . $lastid;
+                $mensaje = 'Almacen insertado con el id: ' . $lastid;
             } else {
-                $mensaje = "HA OCURRIDO UN ERROR EN LA INSERCIÓN";
+                $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
             }
         }
 
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
-        $dat = array("mensaje" => $mensaje, "all" => $all, "prov" => $prov);
-        $this->view("almacen", $dat);
+        $dat = ['mensaje' => $mensaje, 'all' => $all, 'prov' => $prov];
+        $this->view('almacen', $dat);
     }
 
-    public function insertarProveedor() {
+    public function insertarProveedor()
+    {
         $cif = $_POST['cif'];
         $direccion = $_POST['direccion'];
         $telefono = $_POST['telefono'];
@@ -134,47 +165,61 @@ class WebController extends ControladorBase {
 
         $men = $this->proveedoresmodel->getProveedorNombre($nombre);
         if (is_object($men)) {
-            $mensaje = "Ya existe un proveedor con ese nombre.";
+            $mensaje = 'Ya existe un proveedor con ese nombre.';
         } else {
-            $lastid = $this->proveedoresmodel->insertarProveedor($cif, $direccion, $telefono, $nombre, $taller);
+            $lastid = $this->proveedoresmodel->insertarProveedor(
+                $cif,
+                $direccion,
+                $telefono,
+                $nombre,
+                $taller
+            );
             if (is_numeric($lastid)) {
-                $mensaje = "Proveedor insertado con el id: " . $lastid;
+                $mensaje = 'Proveedor insertado con el id: ' . $lastid;
             } else {
-                $mensaje = "HA OCURRIDO UN ERROR EN LA INSERCIÓN";
+                $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
             }
         }
 
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
-        $dat = array("mensaje" => $mensaje, "all" => $all, "prov" => $prov);
-        $this->view("almacen", $dat);
+        $dat = ['mensaje' => $mensaje, 'all' => $all, 'prov' => $prov];
+        $this->view('almacen', $dat);
     }
 
-    public function buscarBastidor() {
+    public function buscarBastidor()
+    {
         $bastidor = $_POST['bastidor'];
-        $vehiculoBastidor = $this->vehiculomodel->getVehiculoBastidor($bastidor);
+        $vehiculoBastidor = $this->vehiculomodel->getVehiculoBastidor(
+            $bastidor
+        );
 
-        $dat = array("vehiculo" => $vehiculoBastidor);
-        $this->view("vehiculos", $dat);
+        $dat = ['vehiculo' => $vehiculoBastidor, 'modo' => 'insertarVehiculo'];
+        $this->view('vehiculos', $dat);
     }
 
-    public function buscarMatricula() {
+    public function buscarMatricula()
+    {
         $matricula = $_POST['matricula'];
-        $vehiculoMatricula = $this->vehiculomodel->getVehiculoMatricula($matricula);
+        $vehiculoMatricula = $this->vehiculomodel->getVehiculoMatricula(
+            $matricula
+        );
 
-        $dat = array("vehiculo" => $vehiculoMatricula);
-        $this->view("vehiculos", $dat);
+        $dat = ['vehiculo' => $vehiculoMatricula, 'modo' => 'insertarVehiculo'];
+        $this->view('vehiculos', $dat);
     }
 
-    public function buscarDNI() {
+    public function buscarDNI()
+    {
         $DNI = $_POST['dni'];
         $vehiculoDNI = $this->vehiculomodel->getVehichuloDni($DNI);
 
-        $dat = array("vehiculo" => $vehiculoDNI);
-        $this->view("vehiculos", $dat);
+        $dat = ['vehiculo' => $vehiculoDNI, 'modo' => 'insertarVehiculo'];
+        $this->view('vehiculos', $dat);
     }
 
-    public function insertarVehiculo() {
+    public function insertarVehiculo()
+    {
         $matricula = $_POST['matricula'];
         $bastidor = $_POST['bastidor'];
         $fecha = $_POST['fecha'];
@@ -185,30 +230,44 @@ class WebController extends ControladorBase {
 
         $men = $this->vehiculomodel->getVehiculoBastidor($bastidor);
         if (is_object($men)) {
-            $mensaje = "Ya existe un Vehiculo con ese bastidor.";
+            $mensaje = 'Ya existe un Vehiculo con ese bastidor.';
         } else {
-            $lastid = $this->vehiculomodel->insertarVehiculo($matricula, $bastidor, $fecha, $nombre, $dni, $telefono, $taller);
+            $lastid = $this->vehiculomodel->insertarVehiculo(
+                $matricula,
+                $bastidor,
+                $fecha,
+                $nombre,
+                $dni,
+                $telefono,
+                $taller
+            );
             if (is_numeric($lastid)) {
-                $mensaje = "vehiculo insertado con el id: " . $lastid;
+                $mensaje = 'vehiculo insertado con el id: ' . $lastid;
             } else {
-                $mensaje = "HA OCURRIDO UN ERROR EN LA INSERCIÓN";
+                $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
             }
         }
 
-        $dat = array("mensaje" => $mensaje);
-        $this->view("vehiculos", $dat);
+        $dat = ['mensaje' => $mensaje];
+        $this->view('vehiculos', $dat);
     }
 
-    public function buscarOperaciones() {
+    public function buscarOperaciones()
+    {
         $matricula = $_POST['matricula'];
-        $operacionMatricula = $this->operacionesmodel->getOperacionesMatricula($matricula);
-
+        $operacionMatricula = $this->operacionesmodel->getOperacionesMatricula(
+            $matricula
+        );
+        $oper = $this->operacionesmodel->getAll();
         $all = $this->almacenmodel->getAll();
-        $dat = array("operaciones" => $operacionMatricula, "pieza" => $all);
-        $this->view("operaciones", $dat);
+        $dat = ['operaciones' => $operacionMatricula, 'pieza' => $all,
+            'modo' => 'insertarOperacion', "oper"=>$oper];
+        $this->view('operaciones', $dat);
     }
 
-    public function insertarOperacion() {
+    public function insertarOperacion()
+    {
+        $id = $_POST['id'];
         $horas = $_POST['horas'];
         $pago = $_POST['pago'];
         if (isset($_POST['presupuesto'])) {
@@ -219,50 +278,113 @@ class WebController extends ControladorBase {
         $matricula = $_POST['matricula'];
         $pieza = $_POST['pieza'];
 
-        $lastid = $this->operacionesmodel->insertarOperacion($horas, $pago, $matricula, $presupuesto, $pieza);
+        $lastid = $this->operacionesmodel->insertarOperacion(
+            $horas,
+            $pago,
+            $matricula,
+            $presupuesto,
+            $pieza, $id
+        );
         if (is_numeric($lastid)) {
-            $mensaje = "Operacion insertado con el id: " . $lastid;
+            $mensaje = 'Operacion insertado con el id: ' . $id;
         } else {
-            $mensaje = "HA OCURRIDO UN ERROR EN LA INSERCIÓN";
+            $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
         }
+        $oper = $this->operacionesmodel->getAll();
+        $all = $this->almacenmodel->getAll();
+        $dat = [
+            'mensaje' => $mensaje,
+            'pieza' => $all,
+            'modo' => 'insertarOperacion', "oper"=>$oper
+        ];
+        $this->view('operaciones', $dat);
+    }
 
+    public function borrarModiVehiculo()
+    {
+        $matricula = $_POST['matricula'];
+        if (isset($_POST['borrar'])) {
+            $mensaje = $this->vehiculomodel->borrarVehiculo($matricula);
+
+            $dat = ['modo' => 'insertarVehiculo', 'mensaje' => $mensaje];
+            $this->view('vehiculos', $dat);
+        }
+        if (isset($_POST['modificar'])) {
+            $vehiculo = $this->vehiculomodel->getVehiculoMatricula($matricula);
+
+            $titulo = 'MODIFICACIÓN';
+            $dat = [
+                'modo' => 'modificarVehiculo',
+                'titulo' => $titulo,
+                'vehiculoModi' => $vehiculos
+            ];
+            $this->view('vehiculos', $dat);
+        }
+    }
+
+    public function modificarVehiculo()
+    {
+        $matricula = $_POST['matricula'];
+        $bastidor = $_POST['bastidor'];
+        $fecha = $_POST['fecha'];
+        $nombre = $_POST['nombre'];
+        $dni = $_POST['dni'];
+        $telefono = $_POST['telefono'];
+
+        $vehiculo = $this->vehiculomodel->modificarVehiculo($matricula, $bastidor, $fecha, $nombre, $dni, $telefono);
+        $dat = [
+            'modo' => 'insertarOperacion',
+            'mensaje' => $vehiculo
+        ];
+        $this->view('vehiculos', $dat);
+    }
+
+    public function modificarOperacion()
+    {
+        $idoperaciones = $_POST['idoperaciones'];
+        $horas = $_POST['horas'];
+        $pago = $_POST['pago'];
+        if (isset($_POST['presupuesto'])) {
+            $presupuesto = 1;
+        } else {
+            $presupuesto = 0;
+        }
+        $matricula = $_POST['matricula'];
+        $pieza = $_POST['pieza'];
 
         $all = $this->almacenmodel->getAll();
-        $dat = array("mensaje" => $mensaje, "pieza" => $all, "modo" => "insertarOperacion");
-        $this->view("operaciones", $dat);
+        $oper = $this->operacionesmodel->getAll();
+        $operacion = $this->operacionesmodel-> modificarOperacion($horas, $pago, $matricula, $presupuesto, $pieza, $idoperaciones);
+
+        $dat = ['mensaje' => $operacion,
+            'pieza' => $all,
+            'modo' => 'insertarOperacion', "oper"=>$oper];
+        $this->view('operaciones', $dat);
     }
 
-    public function borrarModiVehiculo() {
-        $matricula = $_POST['matricula'];
+    
+    public function borrarModiOperacion()
+    {
+        $idoperaciones = $_POST['id'];
         if (isset($_POST['borrar'])) {
-            $mensaje = $this->vehiculomodel->borrarVehiculo($matricula);
- 
-            $dat = array("modo" => "insertarVehiculo", "mensaje" => $mensaje);
-            $this->view("vehiculos", $dat);
+            $mensaje = $this->operacionesmodel->borrarOperacion($idoperaciones);
+            $all = $this->almacenmodel->getAll();
+            $oper = $this->operacionesmodel->getAll();
+            $dat = ['modo' => 'insertarOperacion', 'mensaje' => $mensaje, 'pieza' => $all, "oper"=>$oper];
+            $this->view('operaciones', $dat);
         }
         if (isset($_POST['modificar'])) {
-            $vehiculo = $this->vehiculomodel->getVehiculoMatricula($matricula);
-
-            $titulo = "MODIFICACIÓN";
-            $dat = array("modo" => "modificarVehiculo", "titulo" => $titulo, "vehiculoModi" => $vehiculo);
-            $this->view("vehiculos", $dat);
-        }
-    }
-
-    public function modificarVehiculo() {
-        $matricula = $_POST['matricula'];
-        if (isset($_POST['borrar'])) {
-            $mensaje = $this->vehiculomodel->borrarVehiculo($matricula);
- 
-            $dat = array("modo" => "insertarVehiculo", "mensaje" => $mensaje);
-            $this->view("vehiculos", $dat);
-        }
-        if (isset($_POST['modificar'])) {
-            $vehiculo = $this->vehiculomodel->getVehiculoMatricula($matricula);
-
-            $titulo = "MODIFICACIÓN";
-            $dat = array("modo" => "modificarVehiculo", "titulo" => $titulo, "vehiculoModi" => $vehiculo);
-            $this->view("vehiculos", $dat);
+            $operacionModi = $this->operacionesmodel->getIdOperaciones($idoperaciones);
+            $all = $this->almacenmodel->getAll();
+            $oper = $this->operacionesmodel->getAll();
+            $titulo = 'MODIFICACIÓN';
+            $dat = [
+                'modo' => 'modificarOperacion'
+                'titulo' => $titulo,
+                'operacionModi' => $operacionModi,
+                'pieza' => $all, "oper"=>$oper
+            ];
+            $this->view('operaciones', $dat);
         }
     }
 
