@@ -35,4 +35,25 @@ class TallerModel extends Conexion {
         }
     }
 
+    function registro($name, $password, $activo, $email) {
+        $consulta =
+            'insert into taller (taller, pass, activo, email) ' .
+            ' values(?, ?, ?, ?)';
+        $conn = $this->getConexion();
+        if ($conn == null) {
+            return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
+        }
+        try {
+            $sentencia = $conn->prepare($consulta);
+            $sentencia->bindParam(1, $name);
+            $sentencia->bindParam(2, $password);
+            $sentencia->bindParam(3, $activo);
+            $sentencia->bindParam(4, $email);
+            $num = $sentencia->execute();
+            return $conn->lastInsertId();
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
 }

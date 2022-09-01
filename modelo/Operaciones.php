@@ -2,6 +2,7 @@
 
 class Operaciones {
 
+    private $idoperaciones;
     private $piezaId;
     private $horas;
     private $pago;
