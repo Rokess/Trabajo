@@ -246,5 +246,13 @@
                             <input type="submit" value="SignUp">
                         </form>
                     </ul>
-                <?php } ?>
+                <?php }else{
+                    ?>
+                    <ul class="ul">
+                        <form action="<?php echo $this->url('web', 'cerrarSesion'); ?>" method="POST">
+                            <input type="submit" value="cerrarSesion">
+                        </form>
+                    </ul>
+                <?php
+                } ?>
             </header>

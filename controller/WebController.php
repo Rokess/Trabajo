@@ -388,6 +388,25 @@ class WebController extends ControladorBase
         }
     }
 
+    public function cerrarSesion()
+    {
+        unset($_SESSION['nombre']);
+    }
+
+    public function registro()
+    {
+        $name = $_POST['Name'];
+        $password = $_POST['password'];
+        $email = $_POST['email'];
+        $activo = 1;
+
+        $lastid = $this->tallermodel->registro($name, $password, $activo, $email);
+        
+
+        $dat = ['mensaje' => $mensaje];
+        $this->view('login', $dat);
+    }
+
 }
 
 ?>
