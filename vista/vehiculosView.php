@@ -68,11 +68,10 @@
         </form>
         <hr>
         <h3>Agregar nuevo vehiculo</h3>
-        <?php echo $vehiculoModi[0]['matricula']; ?>
         <form action="<?php echo $this->url('web', $modo); ?>" method="POST">
             <label for="matricula">Matricula</label>
             <?php if ($modo == 'modificarVehiculo') { ?>
-                <input type="text" name="matricula" disabled id="matricula" value="<?php if (
+                <input type="text" name="matricula" readonly id="matricula" value="<?php if (
                     isset($vehiculoModi)
                 ) {
                     echo $vehiculoModi[0]['matricula'];

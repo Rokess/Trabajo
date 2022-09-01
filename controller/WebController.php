@@ -72,7 +72,7 @@ class WebController extends ControladorBase
 
     public function verVehiculos()
     {
-        $dat = ['Vehiculos'];
+        $dat = ['modo' => 'insertarVehiculo'];
         $this->view('vehiculos', $dat); //se abre la vista mensajesView
     }
 
@@ -248,7 +248,7 @@ class WebController extends ControladorBase
             }
         }
 
-        $dat = ['mensaje' => $mensaje];
+        $dat = ['mensaje' => $mensaje, 'modo' => 'insertarVehiculo'];
         $this->view('vehiculos', $dat);
     }
 
@@ -316,7 +316,7 @@ class WebController extends ControladorBase
             $dat = [
                 'modo' => 'modificarVehiculo',
                 'titulo' => $titulo,
-                'vehiculoModi' => $vehiculos
+                'vehiculoModi' => $vehiculo
             ];
             $this->view('vehiculos', $dat);
         }
@@ -365,7 +365,7 @@ class WebController extends ControladorBase
     
     public function borrarModiOperacion()
     {
-        $idoperaciones = $_POST['id'];
+        $idoperaciones = $_POST['idOpe'];
         if (isset($_POST['borrar'])) {
             $mensaje = $this->operacionesmodel->borrarOperacion($idoperaciones);
             $all = $this->almacenmodel->getAll();
@@ -379,7 +379,7 @@ class WebController extends ControladorBase
             $oper = $this->operacionesmodel->getAll();
             $titulo = 'MODIFICACIÓN';
             $dat = [
-                'modo' => 'modificarOperacion'
+                'modo' => 'modificarOperacion',
                 'titulo' => $titulo,
                 'operacionModi' => $operacionModi,
                 'pieza' => $all, "oper"=>$oper

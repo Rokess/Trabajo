@@ -91,15 +91,8 @@ class OperacionesModel extends Conexion
         }
     }
 
-    public function modificarOperacion(
-        $horas,
-        $pago,
-        $matricula,
-        $presupuesto,
-        $pieza, $idoperaciones
-    ) {
-        $consulta =
-            'UPDATE operaciones SET piezaId = ?, horas = ?, pago = ?, matricula = ?, presupuesto = ? WHERE idoperaciones = ? ';
+    public function modificarOperacion($horas,$pago,$matricula,$presupuesto,$piezaId, $idoperaciones) {
+        $consulta ='UPDATE operaciones SET piezaId = ?, horas = ?, pago = ?, matricula = ?, presupuesto = ? WHERE idoperaciones = ? ';
         $conn = $this->getConexion();
         if ($conn == null) {
             return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
