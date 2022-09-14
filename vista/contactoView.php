@@ -7,8 +7,8 @@
         <form action="" method="POST">
             <label for="Name">Nombre de usuario</label>
             <input type="text" id="Name" name="Name" />
-            <label for="password">Email</label>
-            <input type="password" id="password" name="password" />
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" />
             <label for="textarea">Informe</label>
             <textarea id="textarea" name="textarea" placeholder="Por favor describe el problema"></textarea>
             <input type="submit" value="Enviar">

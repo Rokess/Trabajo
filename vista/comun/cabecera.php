@@ -174,22 +174,61 @@
                 display: flex;
                 justify-content: space-around ;
             }
-
+            table{
+                margin: 0 auto;
+            }
+            td{
+                padding-right: 5px;
+            }
+            .flex{
+                display: flex;
+            }
+            td:hover{
+                background-color: #FEDFBC;  
+            }
+            body{
+                background-color: #FFC07C;
+            }
             .ul > li{
                 display: inline-block;
             }
-            .ul > li > a{
+            .ul > form > input{
+                background-color: #c1e3ff;
+                border:none;
                 font-family: LibreBaskerville;
                 text-decoration: none;
                 color: #153f65;
                 padding-left: 15px;
                 padding-right: 15px;
             }
-            .ul > li > a:hover{
+            .ul > form > input:hover{
+                background-color: #edf4fe;
                 font-family: LibreBaskerville_bold;
                 color: #03131f;
             }
+            .ul_footer > form > input{
+                background-color: #12222e;
+                border:none;
+                font-family: LibreBaskerville;
+                text-decoration: none;
+                color: white;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .ul_footer > form > input:hover{
+                background-color: #edf4fe;
+                font-family: LibreBaskerville_bold;
+                color: #03131f;
+            }
+            main{
+                margin: 0 auto;
+                text-align: center;
+                width: 80%;
+            }
             .footer{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
                 color: #edf4fe;
                 background-color: #12222e;
                 display: flex;
@@ -220,7 +259,7 @@
     <body>
         <div class="container">
             <header class="header">
-                <ul class="ul">
+                <ul class="ul flex">
                     <form action="<?php echo $this->url('web', 'verIndex'); ?>" method="POST">
                         <input type="submit" value="Index">
                     </form>
@@ -238,7 +277,7 @@
                 </ul>
                 <h2>KROKOS</h2>
                 <?php if (!isset($_SESSION['nombre'])) { ?>
-                    <ul class="ul">
+                    <ul class="ul flex">
                         <form action="<?php echo $this->url('web', 'verLogin'); ?>" method="POST">
                             <input type="submit" value="Login">
                         </form>
@@ -246,13 +285,13 @@
                             <input type="submit" value="SignUp">
                         </form>
                     </ul>
-                <?php }else{
+                <?php } else {
                     ?>
                     <ul class="ul">
                         <form action="<?php echo $this->url('web', 'cerrarSesion'); ?>" method="POST">
-                            <input type="submit" value="cerrarSesion">
+                            <input type="submit" value="Cerrar Sesion">
                         </form>
                     </ul>
-                <?php
-                } ?>
+                <?php }
+                ?>
             </header>

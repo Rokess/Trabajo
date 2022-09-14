@@ -1,15 +1,14 @@
 <?php
 
-class WebController extends ControladorBase
-{
+class WebController extends ControladorBase {
+
     private $almacenmodel;
     private $operacionesmodel;
     private $proveedoresmodel;
     private $tallermodel;
     private $vehiculomodel;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->almacenmodel = new AlmacenModel();
         $this->operacionesmodel = new OperacionesModel();
@@ -18,66 +17,56 @@ class WebController extends ControladorBase
         $this->vehiculomodel = new VehiculoModel();
     }
 
-    public function index()
-    {
+    public function index() {
         $dat = ['index'];
         $this->view('index', $dat); //se abre la vista mensajesView
     }
 
-    public function verSuscripcion()
-    {
+    public function verSuscripcion() {
         $dat = ['Suscripcion'];
         $this->view('suscripcion', $dat); //se abre la vista mensajesView
     }
 
-    public function verContacto()
-    {
+    public function verContacto() {
         $dat = ['Contacto'];
         $this->view('contacto', $dat); //se abre la vista mensajesView
     }
 
-    public function verInicio()
-    {
+    public function verInicio() {
         $dat = ['Inicio'];
         $this->view('inicio', $dat); //se abre la vista mensajesView
     }
 
-    public function verLogin()
-    {
+    public function verLogin() {
         $dat = ['Login'];
         $this->view('login', $dat); //se abre la vista mensajesView
     }
 
-    public function verSingUp()
-    {
+    public function verSingUp() {
         $dat = ['SigUp'];
         $this->view('singup', $dat); //se abre la vista mensajesView
     }
 
-    public function verAlmacen()
-    {
+    public function verAlmacen() {
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
         $dat = ['all' => $all, 'prov' => $prov];
         $this->view('almacen', $dat); //se abre la vista mensajesView
     }
 
-    public function verOperaciones()
-    {
+    public function verOperaciones() {
         $all = $this->almacenmodel->getAll();
         $oper = $this->operacionesmodel->getAll();
-        $dat = ['pieza' => $all, 'modo' => 'insertarOperacion', "oper"=>$oper];
+        $dat = ['pieza' => $all, 'modo' => 'insertarOperacion', "oper" => $oper];
         $this->view('operaciones', $dat); //se abre la vista mensajesView
     }
 
-    public function verVehiculos()
-    {
+    public function verVehiculos() {
         $dat = ['modo' => 'insertarVehiculo'];
         $this->view('vehiculos', $dat); //se abre la vista mensajesView
     }
 
-    public function comprobarusuclave()
-    {
+    public function comprobarusuclave() {
         $nombre = $_POST['nombre'];
         $clave = $_POST['clave'];
         $usuario = $this->tallermodel->comprobarusuclave($nombre, $clave);
@@ -91,11 +80,10 @@ class WebController extends ControladorBase
         }
     }
 
-    public function buscarProveedor()
-    {
+    public function buscarProveedor() {
         $proveedor = $_POST['proveedor'];
         $almacenProveedor = $this->almacenmodel->getAlmacenProveedor(
-            $proveedor
+                $proveedor
         );
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
@@ -104,11 +92,10 @@ class WebController extends ControladorBase
         $this->view('almacen', $dat);
     }
 
-    public function buscarDescripcion()
-    {
+    public function buscarDescripcion() {
         $descripcion = $_POST['nombre'];
         $almacenDescripcion = $this->almacenmodel->getAlmacenDescripcion(
-            $descripcion
+                $descripcion
         );
         $all = $this->almacenmodel->getAll();
         $prov = $this->proveedoresmodel->getAll();
@@ -121,8 +108,7 @@ class WebController extends ControladorBase
         $this->view('almacen', $dat);
     }
 
-    public function insertarAlmacen()
-    {
+    public function insertarAlmacen() {
         $cantidad = $_POST['cantidad'];
         $descripcion = $_POST['descripcion'];
         $descuento = $_POST['descuento'];
@@ -135,12 +121,12 @@ class WebController extends ControladorBase
             $mensaje = 'Ya existe un dato con ese nombre.';
         } else {
             $lastid = $this->almacenmodel->insertarAlmacen(
-                $id,
-                $cantidad,
-                $descripcion,
-                $descuento,
-                $precio,
-                $nombre
+                    $id,
+                    $cantidad,
+                    $descripcion,
+                    $descuento,
+                    $precio,
+                    $nombre
             );
             if (is_numeric($lastid)) {
                 $mensaje = 'Almacen insertado con el id: ' . $lastid;
@@ -155,8 +141,7 @@ class WebController extends ControladorBase
         $this->view('almacen', $dat);
     }
 
-    public function insertarProveedor()
-    {
+    public function insertarProveedor() {
         $cif = $_POST['cif'];
         $direccion = $_POST['direccion'];
         $telefono = $_POST['telefono'];
@@ -168,11 +153,11 @@ class WebController extends ControladorBase
             $mensaje = 'Ya existe un proveedor con ese nombre.';
         } else {
             $lastid = $this->proveedoresmodel->insertarProveedor(
-                $cif,
-                $direccion,
-                $telefono,
-                $nombre,
-                $taller
+                    $cif,
+                    $direccion,
+                    $telefono,
+                    $nombre,
+                    $taller
             );
             if (is_numeric($lastid)) {
                 $mensaje = 'Proveedor insertado con el id: ' . $lastid;
@@ -187,30 +172,27 @@ class WebController extends ControladorBase
         $this->view('almacen', $dat);
     }
 
-    public function buscarBastidor()
-    {
+    public function buscarBastidor() {
         $bastidor = $_POST['bastidor'];
         $vehiculoBastidor = $this->vehiculomodel->getVehiculoBastidor(
-            $bastidor
+                $bastidor
         );
 
         $dat = ['vehiculo' => $vehiculoBastidor, 'modo' => 'insertarVehiculo'];
         $this->view('vehiculos', $dat);
     }
 
-    public function buscarMatricula()
-    {
+    public function buscarMatricula() {
         $matricula = $_POST['matricula'];
         $vehiculoMatricula = $this->vehiculomodel->getVehiculoMatricula(
-            $matricula
+                $matricula
         );
 
         $dat = ['vehiculo' => $vehiculoMatricula, 'modo' => 'insertarVehiculo'];
         $this->view('vehiculos', $dat);
     }
 
-    public function buscarDNI()
-    {
+    public function buscarDNI() {
         $DNI = $_POST['dni'];
         $vehiculoDNI = $this->vehiculomodel->getVehichuloDni($DNI);
 
@@ -218,8 +200,7 @@ class WebController extends ControladorBase
         $this->view('vehiculos', $dat);
     }
 
-    public function insertarVehiculo()
-    {
+    public function insertarVehiculo() {
         $matricula = $_POST['matricula'];
         $bastidor = $_POST['bastidor'];
         $fecha = $_POST['fecha'];
@@ -233,13 +214,13 @@ class WebController extends ControladorBase
             $mensaje = 'Ya existe un Vehiculo con ese bastidor.';
         } else {
             $lastid = $this->vehiculomodel->insertarVehiculo(
-                $matricula,
-                $bastidor,
-                $fecha,
-                $nombre,
-                $dni,
-                $telefono,
-                $taller
+                    $matricula,
+                    $bastidor,
+                    $fecha,
+                    $nombre,
+                    $dni,
+                    $telefono,
+                    $taller
             );
             if (is_numeric($lastid)) {
                 $mensaje = 'vehiculo insertado con el id: ' . $lastid;
@@ -252,21 +233,19 @@ class WebController extends ControladorBase
         $this->view('vehiculos', $dat);
     }
 
-    public function buscarOperaciones()
-    {
+    public function buscarOperaciones() {
         $matricula = $_POST['matricula'];
         $operacionMatricula = $this->operacionesmodel->getOperacionesMatricula(
-            $matricula
+                $matricula
         );
         $oper = $this->operacionesmodel->getAll();
         $all = $this->almacenmodel->getAll();
         $dat = ['operaciones' => $operacionMatricula, 'pieza' => $all,
-            'modo' => 'insertarOperacion', "oper"=>$oper];
+            'modo' => 'insertarOperacion', "oper" => $oper];
         $this->view('operaciones', $dat);
     }
 
-    public function insertarOperacion()
-    {
+    public function insertarOperacion() {
         $id = $_POST['id'];
         $horas = $_POST['horas'];
         $pago = $_POST['pago'];
@@ -279,11 +258,11 @@ class WebController extends ControladorBase
         $pieza = $_POST['pieza'];
 
         $lastid = $this->operacionesmodel->insertarOperacion(
-            $horas,
-            $pago,
-            $matricula,
-            $presupuesto,
-            $pieza, $id
+                $horas,
+                $pago,
+                $matricula,
+                $presupuesto,
+                $pieza, $id
         );
         if (is_numeric($lastid)) {
             $mensaje = 'Operacion insertado con el id: ' . $id;
@@ -295,13 +274,12 @@ class WebController extends ControladorBase
         $dat = [
             'mensaje' => $mensaje,
             'pieza' => $all,
-            'modo' => 'insertarOperacion', "oper"=>$oper
+            'modo' => 'insertarOperacion', "oper" => $oper
         ];
         $this->view('operaciones', $dat);
     }
 
-    public function borrarModiVehiculo()
-    {
+    public function borrarModiVehiculo() {
         $matricula = $_POST['matricula'];
         if (isset($_POST['borrar'])) {
             $mensaje = $this->vehiculomodel->borrarVehiculo($matricula);
@@ -322,8 +300,7 @@ class WebController extends ControladorBase
         }
     }
 
-    public function modificarVehiculo()
-    {
+    public function modificarVehiculo() {
         $matricula = $_POST['matricula'];
         $bastidor = $_POST['bastidor'];
         $fecha = $_POST['fecha'];
@@ -339,8 +316,7 @@ class WebController extends ControladorBase
         $this->view('vehiculos', $dat);
     }
 
-    public function modificarOperacion()
-    {
+    public function modificarOperacion() {
         $idoperaciones = $_POST['idoperaciones'];
         $horas = $_POST['horas'];
         $pago = $_POST['pago'];
@@ -354,56 +330,53 @@ class WebController extends ControladorBase
 
         $all = $this->almacenmodel->getAll();
         $oper = $this->operacionesmodel->getAll();
-        $operacion = $this->operacionesmodel-> modificarOperacion($horas, $pago, $matricula, $presupuesto, $pieza, $idoperaciones);
+        $operacion = $this->operacionesmodel->modificarOperacion($horas, $pago, $matricula, $presupuesto, $pieza, $idoperaciones);
 
         $dat = ['mensaje' => $operacion,
             'pieza' => $all,
-            'modo' => 'insertarOperacion', "oper"=>$oper];
+            'modo' => 'insertarOperacion', "oper" => $oper];
         $this->view('operaciones', $dat);
     }
 
-    
-    public function borrarModiOperacion()
-    {
+    public function borrarModiOperacion() {
         $idoperaciones = $_POST['idOpe'];
         if (isset($_POST['borrar'])) {
             $mensaje = $this->operacionesmodel->borrarOperacion($idoperaciones);
             $all = $this->almacenmodel->getAll();
             $oper = $this->operacionesmodel->getAll();
-            $dat = ['modo' => 'insertarOperacion', 'mensaje' => $mensaje, 'pieza' => $all, "oper"=>$oper];
+            $dat = ['modo' => 'insertarOperacion', 'mensaje' => $mensaje, 'pieza' => $all, "oper" => $oper];
             $this->view('operaciones', $dat);
         }
         if (isset($_POST['modificar'])) {
             $operacionModi = $this->operacionesmodel->getIdOperaciones($idoperaciones);
             $all = $this->almacenmodel->getAll();
             $oper = $this->operacionesmodel->getAll();
-            $titulo = 'MODIFICACIÓN';
+            $titulo = 'MODIFICACIÓN';          
             $dat = [
                 'modo' => 'modificarOperacion',
                 'titulo' => $titulo,
                 'operacionModi' => $operacionModi,
-                'pieza' => $all, "oper"=>$oper
+                'pieza' => $all, "oper" => $oper
             ];
             $this->view('operaciones', $dat);
         }
     }
 
-    public function cerrarSesion()
-    {
+    public function cerrarSesion() {
+        $dat = ['data' => 'cierre sesion'];
         unset($_SESSION['nombre']);
+        $this->view('login', $dat);
     }
 
-    public function registro()
-    {
+    public function registro() {
         $name = $_POST['Name'];
         $password = $_POST['password'];
         $email = $_POST['email'];
         $activo = 1;
 
         $lastid = $this->tallermodel->registro($name, $password, $activo, $email);
-        
 
-        $dat = ['mensaje' => $mensaje];
+        $dat = ['mensaje' => $lastid];
         $this->view('login', $dat);
     }
 

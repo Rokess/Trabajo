@@ -4,7 +4,7 @@
         <h2>Buscador de vehiculos y añadir nuevos vehiculos</h2>
     </header>
     <main>
-        <?php if (isset($vehiculo)) { ?>
+        <?php if (isset($vehiculo) && count($vehiculo)>0) {?>
             <table>
                 <tr>
                     <th>Matricula</th>
@@ -50,6 +50,7 @@
             <input type="text" name="bastidor" id="bastidor">
             <input type="submit" value="Enviar">
         </form>
+        <br />
         <form action="<?php echo $this->url(
             'web',
             'buscarMatricula'
@@ -57,7 +58,7 @@
             <label for="matricula">Buscar por matricula</label>
             <input type="text" name="matricula" id="matricula">
             <input type="submit" value="Enviar">
-        </form>
+        </form><br />
         <form action="<?php echo $this->url(
             'web',
             'buscarDNI'
@@ -83,37 +84,37 @@
                     echo $vehiculoModi[0]['matricula'];
                 } ?>">
             <?php } ?>
-
+            <br /><br />
             <label for="bastidor">Bastidor</label>
             <input type="text" name="bastidor" id="bastidor" value="<?php if (
                 isset($vehiculoModi)
             ) {
                 echo $vehiculoModi[0]['bastidor'];
-            } ?>">
+            } ?>"><br /><br />
             <label for="fecha">Fecha</label>
             <input type="date" name="fecha" id="fecha" value="<?php if (
                 isset($vehiculoModi)
             ) {
                 echo $vehiculoModi[0]['fecha'];
-            } ?>">
+            } ?>"><br /><br />
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre" value="<?php if (
                 isset($vehiculoModi)
             ) {
                 echo $vehiculoModi[0]['nombre'];
-            } ?>">
+            } ?>"><br /><br />
             <label for="dni">DNI</label>
             <input type="text" name="dni" id="dni" value="<?php if (
                 isset($vehiculoModi)
             ) {
                 echo $vehiculoModi[0]['DNI'];
-            } ?>">
+            } ?>"><br /><br />
             <label for="telefono">telefono</label>
             <input type="number" name="telefono" id="telefono" value="<?php if (
                 isset($vehiculoModi)
             ) {
                 echo $vehiculoModi[0]['Telefono'];
-            } ?>">
+            } ?>"><br /><br />
             <input type="submit" value="Enviar">
         </form>
     </main>

@@ -4,7 +4,7 @@
         <h2>Almacen, añadir nuevas piezas y proveedores</h2>
     </header>
     <main>
-        <?php if (isset($almacen)) { ?>
+        <?php if (isset($almacen) && count($almacen)>0) { ?>
             <table>
                 <tr>
                     <th>Descripcion</th>
@@ -31,8 +31,9 @@
         <form action="<?php echo $this->url('web', 'buscarProveedor'); ?>" method="POST">
             <label for="proveedor">Buscar por proveedor</label>
             <input type="text" name="proveedor" id="proveedor">
-            <input type="submit" value="Enviar">
+            <input type="submit" value="Enviar"><br>
         </form>
+        <br />
         <form action="<?php echo $this->url('web', 'buscarDescripcion'); ?>" method="POST">
             <label for="nombre">Buscar por tipo</label>
             <select name="nombre">
@@ -48,13 +49,13 @@
         <h3>Agregar nuevo articulo al almacen</h3>
         <form action="<?php echo $this->url('web', 'insertarAlmacen'); ?>" method="POST">
             <label for="cantidad">Cantidad</label>
-            <input type="text" name="cantidad" id="cantidad">
+            <input type="text" name="cantidad" id="cantidad"><br /><br />
             <label for="descripcion">Descripcion</label>
-            <input type="text" name="descripcion" id="descripcion">
+            <input type="text" name="descripcion" id="descripcion"><br /><br />
             <label for="descuento">Descuento</label>
-            <input type="text" name="descuento" id="descuento">
+            <input type="text" name="descuento" id="descuento"><br /><br />
             <label for="precio">Precio</label>
-            <input type="number" name="precio" id="precio">
+            <input type="number" name="precio" id="precio"><br /><br />
             <label for="nombre">Nombre</label>
             <select name="nombre">
                 <?php
@@ -68,7 +69,7 @@
             </select>
             <?php
             echo '<input type = "hidden" name = "id" value="'.$id.'">';
-            ?>
+            ?><br /><br />
             <input type="submit" value="Enviar">
         </form>
         <hr>

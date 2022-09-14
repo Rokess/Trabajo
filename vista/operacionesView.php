@@ -4,7 +4,7 @@
         <h2>Buscador de vehiculos y añadir nuevos vehiculos</h2>
     </header>
     <main>
-        <?php if (isset($operaciones)) { ?>
+        <?php if (isset($operaciones) && count($operaciones)>0) { ?>
             <table>
                 <tr>
                     <th>Pieza</th>
@@ -30,13 +30,13 @@
                     echo '<td>' . $row['presupuesto'] . '</td>';
                     ?>
                     <form action = "<?php echo $this->url('web', 'borrarModiOperacion'); ?>" method = "post">
-                        <input name = "idOpe" type = "text" hidden value = "<?php echo $row['idoperaciones'];?>">
+                        <input name = "idOpe" type = "text" hidden value = "<?php echo $row['idoperaciones']; ?>">
                         <td><input type = "submit" name = "modificar" value = "Modificar" /></td>
                         <td><input type = "submit" name = "borrar" value = "Borrar" /></td>
 
                     </form><?php
-                echo '</tr>';
-            }
+                    echo '</tr>';
+                }
                 ?>
             </table>
         <?php } ?>
@@ -99,8 +99,8 @@
             <select name="pieza">
                 <?php
                 foreach ($pieza as $row) {
-                    if ($operacionModi[0]['piezaId'] == $row['piezaId']) {
-                        echo "<option value='" . $row['piezaId'] . " selected'>" . $row['descripcion'] . "</option>";
+                    if (intval($operacionModi[0]['piezaId']) == intval($row['piezaId'])) {
+                        echo "<option value='" . $row['piezaId'] . "' selected>" . $row['descripcion'] . "</option>";
                     } else {
                         echo "<option value='" . $row['piezaId'] . "'>" . $row['descripcion'] . "</option>";
                     }

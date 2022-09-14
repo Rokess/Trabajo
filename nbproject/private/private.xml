@@ -14,10 +14,13 @@
             <file>file:/C:/xampp/htdocs/TFG/modelo/Proveedores.php</file>
             <file>file:/C:/xampp/htdocs/TFG/modelo/OperacionesModel.php</file>
             <file>file:/C:/xampp/htdocs/TFG/vista/comun/pie.php</file>
+            <file>file:/C:/xampp/htdocs/TFG/vista/comun/cabecera.php</file>
+            <file>file:/C:/xampp/htdocs/TFG/modelo/Almacen.php</file>
             <file>file:/C:/xampp/htdocs/TFG/modelo/ProveedoresModel.php</file>
             <file>file:/C:/xampp/htdocs/TFG/vista/inicioView.php</file>
             <file>file:/C:/xampp/htdocs/TFG/modelo/AlmacenModel.php</file>
             <file>file:/C:/xampp/htdocs/TFG/vista/indexView.php</file>
+            <file>file:/C:/xampp/htdocs/TFG/controller/WebController.php</file>
         </group>
     </open-files>
 </project-private>
