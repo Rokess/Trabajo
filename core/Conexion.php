@@ -2,10 +2,10 @@
 
 abstract class Conexion {
 
-    private $servername = "sql108.byethost16.com";
-    private $database = "b16_32594309_tfg2";
-    private $username = "b16_32594309";
-    private $password = "123456";
+    private $servername = "localhost";
+    private $database = "id19569899_tfg";
+    private $username = "id19569899_jorge";
+    private $password = "@7R}QpVsTg6DuxFp";
     private $registros = array();
     private $conexion;
     private $mensajeerror = "";
