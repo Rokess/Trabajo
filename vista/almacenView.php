@@ -27,27 +27,6 @@
             </table>
         <?php }
         ?>
-        <?php if (isset($proveedor) && count($proveedor) > 0) { ?>
-            <table>
-                <tr>
-                    <th>CIF</th>
-                    <th>Direccion</th>
-                    <th>Telefono</th>
-                    <th>Nombre</th>
-                </tr>
-                <?php
-                foreach ($almacen as $row) {
-                    echo"<tr>";
-                    echo"<td>" . $row['cif'] . "</td>";
-                    echo"<td>" . $row['direccion'] . "</td>";
-                    echo"<td>" . $row['telefono'] . "</td>";
-                    echo"<td>" . $row['nombre'] . "</td>";
-                    echo"</tr>";
-                }
-                ?>
-            </table>
-        <?php }
-        ?>
         <hr>
         <form action="<?php echo $this->url('web', 'buscarProveedor'); ?>" method="POST">
             <label for="proveedor">Buscar por proveedor</label>
