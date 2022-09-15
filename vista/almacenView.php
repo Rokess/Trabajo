@@ -4,7 +4,7 @@
         <h2>Almacen, añadir nuevas piezas y proveedores</h2>
     </header>
     <main>
-        <?php if (isset($almacen) && count($almacen)>0) { ?>
+        <?php if (isset($almacen) && count($almacen) > 0) { ?>
             <table>
                 <tr>
                     <th>Descripcion</th>
@@ -20,6 +20,27 @@
                     echo"<td>" . $row['cantidad'] . "</td>";
                     echo"<td>" . $row['descuento'] . "</td>";
                     echo"<td>" . $row['precio'] . "</td>";
+                    echo"<td>" . $row['nombre'] . "</td>";
+                    echo"</tr>";
+                }
+                ?>
+            </table>
+        <?php }
+        ?>
+        <?php if (isset($proveedor) && count($proveedor) > 0) { ?>
+            <table>
+                <tr>
+                    <th>CIF</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Nombre</th>
+                </tr>
+                <?php
+                foreach ($almacen as $row) {
+                    echo"<tr>";
+                    echo"<td>" . $row['cif'] . "</td>";
+                    echo"<td>" . $row['direccion'] . "</td>";
+                    echo"<td>" . $row['telefono'] . "</td>";
                     echo"<td>" . $row['nombre'] . "</td>";
                     echo"</tr>";
                 }
@@ -59,16 +80,16 @@
             <label for="nombre">Nombre</label>
             <select name="nombre">
                 <?php
-                $id=0;
+                $id = 0;
                 foreach ($prov as $row) {
                     echo"<option value='" . $row['nombre'] . "'>" . $row['nombre'] . "</option>";
-                    $id= $row['piezaId'];
+                    $id = $row['piezaId'];
                 }
-                $id=$id+1;
+                $id = $id + 1;
                 ?>
             </select>
             <?php
-            echo '<input type = "hidden" name = "id" value="'.$id.'">';
+            echo '<input type = "hidden" name = "id" value="' . $id . '">';
             ?><br /><br />
             <input type="submit" value="Enviar">
         </form>
