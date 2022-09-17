@@ -48,14 +48,14 @@ class WebController extends ControladorBase {
     }
 
     public function verAlmacen() {
-        $all = $this->almacenmodel->getAll();
-        $prov = $this->proveedoresmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
+        $prov = $this->proveedoresmodel->getAll($_SESSION['nombre']);
         $dat = ['all' => $all, 'prov' => $prov];
         $this->view('almacen', $dat); //se abre la vista mensajesView
     }
 
     public function verOperaciones() {
-        $all = $this->almacenmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
         $oper = $this->operacionesmodel->getAll();
         $dat = ['pieza' => $all, 'modo' => 'insertarOperacion', "oper" => $oper];
         $this->view('operaciones', $dat); //se abre la vista mensajesView
@@ -85,8 +85,8 @@ class WebController extends ControladorBase {
         $almacenProveedor = $this->almacenmodel->getAlmacenProveedor(
                 $proveedor
         );
-        $all = $this->almacenmodel->getAll();
-        $prov = $this->proveedoresmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
+        $prov = $this->proveedoresmodel->getAll($_SESSION['nombre']);
 
         $dat = ['almacen' => $almacenProveedor, 'all' => $all, 'prov' => $prov];
         $this->view('almacen', $dat);
@@ -97,8 +97,8 @@ class WebController extends ControladorBase {
         $almacenDescripcion = $this->almacenmodel->getAlmacenDescripcion(
                 $descripcion
         );
-        $all = $this->almacenmodel->getAll();
-        $prov = $this->proveedoresmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
+        $prov = $this->proveedoresmodel->getAll($_SESSION['nombre']);
 
         $dat = [
             'almacen' => $almacenDescripcion,
@@ -135,8 +135,8 @@ class WebController extends ControladorBase {
             }
         }
 
-        $all = $this->almacenmodel->getAll();
-        $prov = $this->proveedoresmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
+        $prov = $this->proveedoresmodel->getAll($_SESSION['nombre']);
         $dat = ['mensaje' => $mensaje, 'all' => $all, 'prov' => $prov];
         $this->view('almacen', $dat);
     }
@@ -148,7 +148,7 @@ class WebController extends ControladorBase {
         $nombre = $_POST['nombre'];
         $taller = $_SESSION['nombre'];
 
-        $men = $this->proveedoresmodel->getProveedorNombre($nombre);
+        $men = $this->proveedoresmodel->getProveedorNombre($nombre, $_SESSION['nombre']);
         if (is_object($men)) {
             $mensaje = 'Ya existe un proveedor con ese nombre.';
         } else {
@@ -166,8 +166,8 @@ class WebController extends ControladorBase {
             }
         }
 
-        $all = $this->almacenmodel->getAll();
-        $prov = $this->proveedoresmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
+        $prov = $this->proveedoresmodel->getAll($_SESSION['nombre']);
         $dat = ['mensaje' => $mensaje, 'all' => $all, 'prov' => $prov];
         $this->view('almacen', $dat);
     }
@@ -239,7 +239,7 @@ class WebController extends ControladorBase {
                 $matricula
         );
         $oper = $this->operacionesmodel->getAll();
-        $all = $this->almacenmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
         $dat = ['operaciones' => $operacionMatricula, 'pieza' => $all,
             'modo' => 'insertarOperacion', "oper" => $oper];
         $this->view('operaciones', $dat);
@@ -270,7 +270,7 @@ class WebController extends ControladorBase {
             $mensaje = '!HA OCURRIDO UN ERROR!';
         }
         $oper = $this->operacionesmodel->getAll();
-        $all = $this->almacenmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
         $dat = [
             'mensaje' => $mensaje,
             'pieza' => $all,
@@ -328,7 +328,7 @@ class WebController extends ControladorBase {
         $matricula = $_POST['matricula'];
         $pieza = $_POST['pieza'];
 
-        $all = $this->almacenmodel->getAll();
+        $all = $this->almacenmodel->getAll($_SESSION['nombre']);
         $oper = $this->operacionesmodel->getAll();
         $operacion = $this->operacionesmodel->modificarOperacion($horas, $pago, $matricula, $presupuesto, $pieza, $idoperaciones);
 
@@ -342,14 +342,14 @@ class WebController extends ControladorBase {
         $idoperaciones = $_POST['idOpe'];
         if (isset($_POST['borrar'])) {
             $mensaje = $this->operacionesmodel->borrarOperacion($idoperaciones);
-            $all = $this->almacenmodel->getAll();
+            $all = $this->almacenmodel->getAll($_SESSION['nombre']);
             $oper = $this->operacionesmodel->getAll();
             $dat = ['modo' => 'insertarOperacion', 'mensaje' => $mensaje, 'pieza' => $all, "oper" => $oper];
             $this->view('operaciones', $dat);
         }
         if (isset($_POST['modificar'])) {
             $operacionModi = $this->operacionesmodel->getIdOperaciones($idoperaciones);
-            $all = $this->almacenmodel->getAll();
+            $all = $this->almacenmodel->getAll($_SESSION['nombre']);
             $oper = $this->operacionesmodel->getAll();
             $titulo = 'MODIFICACIÓN';          
             $dat = [

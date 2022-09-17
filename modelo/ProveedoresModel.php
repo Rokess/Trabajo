@@ -33,8 +33,8 @@ class ProveedoresModel extends Conexion {
         }
     }
 
-    function getProveedorNombre($nombre) {
-        $consulta = "select * from proveedores where nombre = ? ";
+    function getProveedorNombre($nombre, $taller) {
+        $consulta = "select * from proveedores where nombre = ? AND taller = ?";
         $conn = $this->getConexion();
         if ($conn == null) {
             return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
@@ -42,6 +42,7 @@ class ProveedoresModel extends Conexion {
         try {
             $sentencia = $conn->prepare($consulta);
             $sentencia->bindParam(1, $nombre);
+            $sentencia->bindParam(2, $taller);
             $sentencia->execute();
             $registros = $sentencia->fetchAll();
             return $registros;
@@ -50,12 +51,17 @@ class ProveedoresModel extends Conexion {
         }
     }
 
-    public function getAll() {
+    public function getAll($taller) {
+        $consulta = "select * from proveedores where taller = ? ";
+        $conn = $this->getConexion();
+        if ($conn == null) {
+            return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
+        }
         try {
-            $sql = "SELECT * from proveedores";
-            $statement = $this->conexion->query($sql);
-            $registros = $statement->fetchAll();
-            $statement = null;
+            $sentencia = $conn->prepare($consulta);
+            $sentencia->bindParam(1, $taller);
+            $sentencia->execute();
+            $registros = $sentencia->fetchAll();
             return $registros;
         } catch (PDOException $e) {
             return $e->getMessage();

@@ -10,12 +10,17 @@ class AlmacenModel extends Conexion {
         $this->conexion = $this->getConexion();
     }
 
-    public function getAll() {
+    public function getAll($taller) {
+        $consulta = "SELECT * from almacen join proveedores on almacen.nombre = proveedores.nombre where proveedores.taller =  ? ";
+        $conn = $this->getConexion();
+        if ($conn == null) {
+            return "<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>";
+        }
         try {
-            $sql = "SELECT * from almacen";
-            $statement = $this->conexion->query($sql);
-            $registros = $statement->fetchAll();
-            $statement = null;
+            $sentencia = $conn->prepare($consulta);
+            $sentencia->bindParam(1, $taller);
+            $sentencia->execute();
+            $registros = $sentencia->fetchAll();
             return $registros;
         } catch (PDOException $e) {
             return $e->getMessage();

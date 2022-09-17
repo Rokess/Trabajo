@@ -7,6 +7,7 @@
         <title>TFG</title>
         <link href="../css/style.css" rel="stylesheet">
         <link href="../css/normalize.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="./vista/assets/images/favicon.png">
         <style>
             html {
                 line-height: 1.15; /* 1 */
