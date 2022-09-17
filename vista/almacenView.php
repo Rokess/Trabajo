@@ -4,7 +4,15 @@
         <h2>Almacen, añadir nuevas piezas y proveedores</h2>
     </header>
     <main>
-        <?php if (isset($almacen) && count($almacen)>0) { ?>
+        <?php
+        if (isset($mensaje) && $mensaje == "!HA OCURRIDO UN ERROR!") {
+            echo "<h2 style='color:red'>" . $mensaje . "</h2>";
+        }
+        if (isset($mensaje) && $mensaje != "!HA OCURRIDO UN ERROR!") {
+            echo "<h2 style='color:green'>" . $mensaje . "</h2>";
+        }
+        ?>
+        <?php if (isset($almacen) && count($almacen) > 0) { ?>
             <table>
                 <tr>
                     <th>Descripcion</th>
@@ -49,26 +57,26 @@
         <h3>Agregar nuevo articulo al almacen</h3>
         <form action="<?php echo $this->url('web', 'insertarAlmacen'); ?>" method="POST">
             <label for="cantidad">Cantidad</label>
-            <input type="text" name="cantidad" id="cantidad"><br /><br />
+            <input type="number" name="cantidad" id="cantidad"><br /><br />
             <label for="descripcion">Descripcion</label>
             <input type="text" name="descripcion" id="descripcion"><br /><br />
             <label for="descuento">Descuento</label>
-            <input type="text" name="descuento" id="descuento"><br /><br />
+            <input type="number" name="descuento" id="descuento"><br /><br />
             <label for="precio">Precio</label>
             <input type="number" name="precio" id="precio"><br /><br />
             <label for="nombre">Nombre</label>
             <select name="nombre">
                 <?php
-                $id=0;
+                $id = 0;
                 foreach ($prov as $row) {
                     echo"<option value='" . $row['nombre'] . "'>" . $row['nombre'] . "</option>";
-                    $id= $row['piezaId'];
+                    $id = $row['piezaId'];
                 }
-                $id=$id+1;
+                $id = $id + 1;
                 ?>
             </select>
             <?php
-            echo '<input type = "hidden" name = "id" value="'.$id.'">';
+            echo '<input type = "hidden" name = "id" value="' . $id . '">';
             ?><br /><br />
             <input type="submit" value="Enviar">
         </form>

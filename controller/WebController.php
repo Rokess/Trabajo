@@ -131,7 +131,7 @@ class WebController extends ControladorBase {
             if (is_numeric($lastid)) {
                 $mensaje = 'Almacen insertado con el id: ' . $lastid;
             } else {
-                $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
+                $mensaje = '!HA OCURRIDO UN ERROR!';
             }
         }
 
@@ -162,7 +162,7 @@ class WebController extends ControladorBase {
             if (is_numeric($lastid)) {
                 $mensaje = 'Proveedor insertado con el id: ' . $lastid;
             } else {
-                $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
+                $mensaje = '!HA OCURRIDO UN ERROR!';
             }
         }
 
@@ -225,7 +225,7 @@ class WebController extends ControladorBase {
             if (is_numeric($lastid)) {
                 $mensaje = 'vehiculo insertado con el id: ' . $lastid;
             } else {
-                $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
+                $mensaje = '!HA OCURRIDO UN ERROR!';
             }
         }
 
@@ -267,7 +267,7 @@ class WebController extends ControladorBase {
         if (is_numeric($lastid)) {
             $mensaje = 'Operacion insertado con el id: ' . $id;
         } else {
-            $mensaje = 'HA OCURRIDO UN ERROR EN LA INSERCIÓN';
+            $mensaje = '!HA OCURRIDO UN ERROR!';
         }
         $oper = $this->operacionesmodel->getAll();
         $all = $this->almacenmodel->getAll();
@@ -310,7 +310,7 @@ class WebController extends ControladorBase {
 
         $vehiculo = $this->vehiculomodel->modificarVehiculo($matricula, $bastidor, $fecha, $nombre, $dni, $telefono);
         $dat = [
-            'modo' => 'insertarOperacion',
+            'modo' => 'insertarVehiculo',
             'mensaje' => $vehiculo
         ];
         $this->view('vehiculos', $dat);

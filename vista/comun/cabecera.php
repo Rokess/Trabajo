@@ -182,12 +182,13 @@
             }
             .flex{
                 display: flex;
+                                justify-content: space-around ;
             }
             td:hover{
-                background-color: #FEDFBC;  
+                background-color: #FEDFBC;
             }
             body{
-                background-color: #FFC07C;
+                background-color: #F5EFE9;
             }
             .ul > li{
                 display: inline-block;
@@ -201,6 +202,7 @@
                 padding-left: 15px;
                 padding-right: 15px;
             }
+
             .ul > form > input:hover{
                 background-color: #edf4fe;
                 font-family: LibreBaskerville_bold;

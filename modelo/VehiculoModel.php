@@ -140,7 +140,7 @@ class VehiculoModel extends Conexion
             $num = $sentencia->execute();
             return "Actualizado con exito!";
         } catch (PDOException $e) {
-            return $e->getMessage();
+            return "!HA OCURRIDO UN ERROR!";
         }
     }
 }

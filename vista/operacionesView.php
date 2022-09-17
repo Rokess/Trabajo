@@ -1,9 +1,17 @@
 
 <main>
     <header>
-        <h2>Buscador de vehiculos y añadir nuevos vehiculos</h2>
+        <h2>Buscador de operaciones y añadir nuevas operaciones</h2>
     </header>
     <main>
+        <?php 
+        if(isset($mensaje) && $mensaje == "!HA OCURRIDO UN ERROR!"){
+            echo "<h2 style='color:red'>".$mensaje."</h2>";
+        }
+        if(isset($mensaje) && $mensaje != "!HA OCURRIDO UN ERROR!"){
+            echo "<h2 style='color:green'>".$mensaje."</h2>";
+        }
+        ?>
         <?php if (isset($operaciones) && count($operaciones)>0) { ?>
             <table>
                 <tr>
@@ -53,7 +61,7 @@
             <input type="submit" value="Enviar">
         </form>
         <hr>
-        <h3>Agregar nuevo vehiculo</h3>
+        <h3>Agregar nueva operacion</h3>
         <form action="<?php echo $this->url('web', $modo); ?>" method="POST">
             <?php
             $id = 0;
