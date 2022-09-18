@@ -7,6 +7,7 @@
         <title>TFG</title>
         <link href="../css/style.css" rel="stylesheet">
         <link href="../css/normalize.css" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="./vista/assets/images/favicon.png">
         <style>
             html {
                 line-height: 1.15; /* 1 */
@@ -182,12 +183,16 @@
             }
             .flex{
                 display: flex;
+                justify-content: space-around ;
             }
             td:hover{
-                background-color: #FEDFBC;  
+                background-color: #FEDFBC;
             }
             body{
-                background-color: #FFC07C;
+                background-color: #F5EFE9;
+            }
+            .ul{
+                padding:0px;
             }
             .ul > li{
                 display: inline-block;
@@ -198,9 +203,10 @@
                 font-family: LibreBaskerville;
                 text-decoration: none;
                 color: #153f65;
-                padding-left: 15px;
-                padding-right: 15px;
+                padding-left: 10px;
+                padding-right: 10px;
             }
+
             .ul > form > input:hover{
                 background-color: #edf4fe;
                 font-family: LibreBaskerville_bold;
@@ -226,8 +232,9 @@
                 width: 80%;
             }
             .footer{
-                position: absolute;
-                bottom: 0;
+               position:fixed;
+               left:0px;
+               bottom:0px;
                 width: 100%;
                 color: #edf4fe;
                 background-color: #12222e;
@@ -248,7 +255,7 @@
                 color: #edf4fe;
             }
             .footer_img{
-                width: 3rem;
+                width: 2.25rem;
                 display: flex;
             }
             .footer_img >img{

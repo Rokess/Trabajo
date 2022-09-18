@@ -4,6 +4,14 @@
         <h2>Almacen, añadir nuevas piezas y proveedores</h2>
     </header>
     <main>
+        <?php
+        if (isset($mensaje) && $mensaje == "!HA OCURRIDO UN ERROR!") {
+            echo "<h2 style='color:red'>" . $mensaje . "</h2>";
+        }
+        if (isset($mensaje) && $mensaje != "!HA OCURRIDO UN ERROR!") {
+            echo "<h2 style='color:green'>" . $mensaje . "</h2>";
+        }
+        ?>
         <?php if (isset($almacen) && count($almacen) > 0) { ?>
             <table>
                 <tr>
@@ -46,44 +54,49 @@
             <input type="submit" value="Enviar">
         </form>
         <hr>
-        <h3>Agregar nuevo articulo al almacen</h3>
-        <form action="<?php echo $this->url('web', 'insertarAlmacen'); ?>" method="POST">
-            <label for="cantidad">Cantidad</label>
-            <input type="text" name="cantidad" id="cantidad"><br /><br />
-            <label for="descripcion">Descripcion</label>
-            <input type="text" name="descripcion" id="descripcion"><br /><br />
-            <label for="descuento">Descuento</label>
-            <input type="text" name="descuento" id="descuento"><br /><br />
-            <label for="precio">Precio</label>
-            <input type="number" name="precio" id="precio"><br /><br />
-            <label for="nombre">Nombre</label>
-            <select name="nombre">
-                <?php
-                $id = 0;
-                foreach ($prov as $row) {
-                    echo"<option value='" . $row['nombre'] . "'>" . $row['nombre'] . "</option>";
-                    $id = $row['piezaId'];
-                }
-                $id = $id + 1;
-                ?>
-            </select>
-            <?php
-            echo '<input type = "hidden" name = "id" value="' . $id . '">';
-            ?><br /><br />
-            <input type="submit" value="Enviar">
-        </form>
-        <hr>
-        <h3>Agregar nuevo proveedor</h3>
-        <form action="<?php echo $this->url('web', 'insertarProveedor'); ?>" method="POST">
-            <label for="cif">Cif</label>
-            <input type="text" name="cif" id="cif">
-            <label for="direccion">Direccion</label>
-            <input type="text" name="direccion" id="direccion">
-            <label for="telefono">Telefono</label>
-            <input type="number" name="telefono" id="telefono">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre">
-            <input type="submit" value="Enviar">
-        </form>
+        <div  class="flex">
+            <div>
+                <h3>Agregar nuevo articulo al almacen</h3>
+                <form action="<?php echo $this->url('web', 'insertarAlmacen'); ?>" method="POST">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" id="cantidad"><br /><br />
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" name="descripcion" id="descripcion"><br /><br />
+                    <label for="descuento">Descuento</label>
+                    <input type="number" name="descuento" id="descuento"><br /><br />
+                    <label for="precio">Precio</label>
+                    <input type="number" name="precio" id="precio"><br /><br />
+                    <label for="nombre">Nombre</label>
+                    <select name="nombre">
+                        <?php
+                        $id = 0;
+                        foreach ($prov as $row) {
+                            echo"<option value='" . $row['nombre'] . "'>" . $row['nombre'] . "</option>";
+                            $id = $row['piezaId'];
+                        }
+                        $id = $id + 1;
+                        ?>
+                    </select>
+                    <?php
+                    echo '<input type = "hidden" name = "id" value="' . $id . '">';
+                    ?>
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+            <div>
+                <h3>Agregar nuevo proveedor</h3>
+                <form action="<?php echo $this->url('web', 'insertarProveedor'); ?>" method="POST">
+                    <label for="cif">Cif</label>
+                    <input type="text" name="cif" id="cif"><br /><br />
+                    <label for="direccion">Direccion</label>
+                    <input type="text" name="direccion" id="direccion"><br /><br />
+                    <label for="telefono">Telefono</label>
+                    <input type="number" name="telefono" id="telefono"><br /><br />
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre"><br /><br />
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+        </div>
     </main>
 </main>

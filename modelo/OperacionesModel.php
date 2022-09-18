@@ -12,9 +12,9 @@ class OperacionesModel extends Conexion
         $this->conexion = $this->getConexion();
     }
 
-    function getOperacionesMatricula($matricula)
+    function getOperacionesMatricula($matricula, $taller)
     {
-        $consulta = 'select * from operaciones where matricula = ? ';
+        $consulta = "select * from operaciones join vehiculo on operaciones.matricula = vehiculo.matricula where operaciones.matricula = ? AND vehiculo.taller =  ? ";
         $conn = $this->getConexion();
         if ($conn == null) {
             return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
@@ -22,6 +22,7 @@ class OperacionesModel extends Conexion
         try {
             $sentencia = $conn->prepare($consulta);
             $sentencia->bindParam(1, $matricula);
+            $sentencia->bindParam(2, $taller);
             $sentencia->execute();
             $registros = $sentencia->fetchAll();
             return $registros;
@@ -32,7 +33,7 @@ class OperacionesModel extends Conexion
 
     function getIdOperaciones($idoperaciones)
     {
-        $consulta = 'select * from operaciones where idoperaciones = ? ';
+        $consulta = 'select * from operaciones where idoperaciones = ?';
         $conn = $this->getConexion();
         if ($conn == null) {
             return '<h2>ERROR. CONEXIÓN NO ESTABLECIDA.</h2>';
@@ -108,7 +109,7 @@ class OperacionesModel extends Conexion
             $num = $sentencia->execute();
             return 'Actualizado con exito!';
         } catch (PDOException $e) {
-            return $e->getMessage();
+            return "!HA OCURRIDO UN ERROR!";
         }
     }
 

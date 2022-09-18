@@ -13,7 +13,7 @@
         </ul>
     </div>
     <div>
-        <h2>REDES SOCIALES</h2>
+        <h3>REDES SOCIALES</h3>
         <div class="footer_img">
             <img src="./vista/assets/images/insta.png">
             <img src="./vista/assets/images/facebook.png">

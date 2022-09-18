@@ -3,9 +3,9 @@
 abstract class Conexion {
 
     private $servername = "localhost";
-    private $database = "id19569899_tfg";
-    private $username = "id19569899_jorge";
-    private $password = "@7R}QpVsTg6DuxFp";
+    private $database = "id19579362_krorkostfg";
+    private $username = "id19579362_krorkos";
+    private $password = "myqWZy[B-U8V9ADK";
     private $registros = array();
     private $conexion;
     private $mensajeerror = "";
